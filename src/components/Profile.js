@@ -15,8 +15,7 @@ const Profile = () => {
   const handleOnClick = () => {
     setCount(count + 1);
   };
-  console.log("render");
-  return (  
+  return (
     <div>
       <h1>{count}</h1>
       <button onClick={handleOnClick}>increment</button>

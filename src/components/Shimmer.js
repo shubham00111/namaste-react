@@ -1,5 +1,3 @@
-import React from "react";
-
 const Shimmer = () => {
   return Array(20)
     .fill("")

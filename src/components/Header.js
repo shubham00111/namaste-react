@@ -1,9 +1,13 @@
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import useOnline from "../utils/useOnline";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const online = useOnline();
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -23,8 +27,12 @@ const Header = () => {
           <li>
             <Link to={"/cart"}>Cart</Link>
           </li>
+          <li>
+            <Link to={"/instamart"}>Instamart</Link>
+          </li>
         </ul>
       </div>
+      <h2>{online ? "🟢" : "🔴"}</h2>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Log Out</button>
       ) : (
