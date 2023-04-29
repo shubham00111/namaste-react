@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { getFilteredData } from "../utils/Util";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   // Local State Variable - Super powerful variable
@@ -25,16 +27,16 @@ const Body = () => {
     setFilteredListOfRestaurants(jsonData?.data?.cards[2]?.data?.data?.cards);
   }
 
-  const getFilteredData = (search, resList) => {
-    return resList.filter((res) => {
-      return res.data.name.toLowerCase().includes(search.toLowerCase());
-    });
-  };
-
   const handleOnSearch = (e) => {
     const filteredData = getFilteredData(searchInput, listOfRestaurants);
     setFilteredListOfRestaurants(filteredData);
   };
+
+  const online = useOnline();
+
+  if (!online) {
+    return <h1>Looks like you have no internet Connection!!</h1>;
+  }
 
   return (
     <div className="body">
@@ -56,6 +58,7 @@ const Body = () => {
             <Link
               to={`/restaurant/${restaurant.data.id}`}
               key={restaurant.data.id}
+              style={{ color: "inherit", textDecoration: "inherit" }}
             >
               <RestaurantCard resData={restaurant} />
             </Link>
