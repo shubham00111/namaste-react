@@ -5,27 +5,20 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { getFilteredData } from "../utils/Util";
 import useOnline from "../utils/useOnline";
+import useAllRestaurant from "../utils/useAllRestaurant";
 
 const Body = () => {
   // Local State Variable - Super powerful variable
-  const [listOfRestaurants, setListOfRestaraunts] = useState([]);
+  const listOfRestaurants = useAllRestaurant();
+
   const [filtererdListOfRestaurants, setFilteredListOfRestaurants] = useState(
     []
   );
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    getApiCall();
-  }, []);
-
-  async function getApiCall() {
-    const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING"
-    );
-    const jsonData = await response.json();
-    setListOfRestaraunts(jsonData?.data?.cards[2]?.data?.data?.cards);
-    setFilteredListOfRestaurants(jsonData?.data?.cards[2]?.data?.data?.cards);
-  }
+    setFilteredListOfRestaurants(listOfRestaurants);
+  }, [listOfRestaurants]);
 
   const handleOnSearch = (e) => {
     const filteredData = getFilteredData(searchInput, listOfRestaurants);
