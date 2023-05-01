@@ -34,18 +34,23 @@ const Body = () => {
   return (
     <div className="body">
       <div className="filter">
-        <div className="search-input">
+        <div className="search-input flex gap-2 p-3 bg-pink-50">
           <input
             type="text"
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
           />
-        </div>
-        <div className="search-btn">
-          <button onClick={handleOnSearch}>Search</button>
+          <div className="search-btn ">
+            <button
+              className=" bg-purple-700 text-white p-2 rounded-md"
+              onClick={handleOnSearch}
+            >
+              Search
+            </button>
+          </div>
         </div>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap gap-5 p-3">
         {listOfRestaurants.length > 1 ? (
           filtererdListOfRestaurants.map((restaurant) => (
             <Link

@@ -9,12 +9,12 @@ const Header = () => {
   const online = useOnline();
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+    <div className="flex items-center justify-between bg-pink-50 shadow-lg flex-wrap">
+      <div className="logo-container ">
+        <img className="h-28 p-2 sm:h-full sm:w-full" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex gap-4">
           <li>
             <Link to={"/"}>Home</Link>
           </li>
