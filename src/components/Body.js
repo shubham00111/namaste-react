@@ -1,11 +1,12 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { getFilteredData } from "../utils/Util";
 import useOnline from "../utils/useOnline";
 import useAllRestaurant from "../utils/useAllRestaurant";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // Local State Variable - Super powerful variable
@@ -27,6 +28,8 @@ const Body = () => {
 
   const online = useOnline();
 
+  const { user, setUser } = useContext(UserContext);
+
   if (!online) {
     return <h1>Looks like you have no internet Connection!!</h1>;
   }
@@ -47,6 +50,13 @@ const Body = () => {
             >
               Search
             </button>
+          </div>
+          <div>
+            <input
+              type="text"
+              value={user.name}
+              onChange={(e) => setUser({ ...user, name: e.target.value })}
+            />
           </div>
         </div>
       </div>

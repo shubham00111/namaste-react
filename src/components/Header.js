@@ -1,17 +1,19 @@
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const online = useOnline();
+  const { user } = useContext(UserContext);
 
   return (
     <div className="flex items-center justify-between bg-pink-50 shadow-lg flex-wrap">
       <div className="logo-container ">
-        <img className="h-28 p-2 sm:h-full sm:w-full" src={LOGO_URL} />
+        <img className="h-28 p-2  " src={LOGO_URL} />
       </div>
       <div className="nav-items">
         <ul className="flex gap-4">
@@ -32,6 +34,10 @@ const Header = () => {
           </li>
         </ul>
       </div>
+
+      <h2>
+        {user.name} {user.email}
+      </h2>
       <h2>{online ? "🟢" : "🔴"}</h2>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Log Out</button>
